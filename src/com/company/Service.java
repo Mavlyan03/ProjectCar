@@ -29,4 +29,24 @@ public class Service {
         System.out.println("---------------------------");
     }
 
+    public static void changeDriver(Car car, Driver driver) {
+        try {
+            if (car.getState().equals(State.BASE)) {
+                car.setDriver(driver.getDriverName());
+                driver.setBus(car.getName());
+            } else if (car.getDriver() != null) {
+                if (car.getState().equals(State.ROUTE)) {
+                    System.out.println("Driver started his way successfully!");
+                } else {
+                    throw new MyException("You can't drive without driver!");
+                }
+            } else {
+                car.setState(State.REPAIR);
+                System.out.println("Car is on repairing now!");
+            }
+        } catch (MyException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
 }
