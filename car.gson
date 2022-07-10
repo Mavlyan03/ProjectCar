@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Chevrolet Impala ",
+    "state": "BASE"
+  },
+  {
+    "id": 2,
+    "name": "Toyota Highlander",
+    "state": "BASE"
+  },
+  {
+    "id": 3,
+    "name": "Cadillac Escalade",
+    "state": "BASE"
+  }
+]
