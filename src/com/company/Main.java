@@ -31,6 +31,7 @@ public class Main {
                 new Driver("driver-3", "Sam ", null)
         };
 
+
         String jsonCar = GSON.toJson(cars);
         setWritePath(jsonCar);
 

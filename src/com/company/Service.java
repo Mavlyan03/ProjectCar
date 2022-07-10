@@ -1,5 +1,7 @@
 package com.company;
 
+import java.io.IOException;
+
 public class Service {
     public static void getCars(Car[]cars){
         System.out.println("~~~~~~~~~~~~~~~~~ * CARS * ~~~~~~~~~~~~~~~~~~~");
@@ -45,6 +47,49 @@ public class Service {
                 System.out.println("Car is on repairing now!");
             }
         } catch (MyException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+    public static void startDriving(Car car, Driver driver) {
+        try {
+            if (car.getState().equals(State.BASE)) {
+                if (car.getDriver() != null) {
+                    car.setState(State.ROUTE);
+                    System.out.println("Driver started his way successfully!");
+                } else if (car.getState().equals(State.BASE)) {
+                    if (car.getDriver() == null) {
+                        throw new IOException();
+                    }
+                }
+            }  else if (car.getState().equals(State.ROUTE)) {
+                throw new MyException("Car is already on the route!");
+            }
+            else {
+                car.setState(State.REPAIR);
+                System.out.println("Car is on repairing now!");
+            }
+        } catch(MyException e) {
+            System.err.println(e.getMessage());
+        } catch(IOException e) {
+            System.err.println("You can't drive without driver!");
+        }
+    }
+
+    public static void startRepair(Car car, Driver driver) {
+        try {
+            if (car.getState().equals(State.BASE)) {
+                car.setState(State.REPAIR);
+                System.out.println("Car is on repairing now!");
+
+            } else if (car.getState().equals(State.REPAIR)) {
+                throw new MyException("Car is already on repair now!");
+            }
+            else if (car.getState().equals(State.ROUTE)) {
+                car.setState(State.REPAIR);
+                System.out.println("Car is on repairing now!");
+            }
+
+        } catch(MyException e) {
             System.err.println(e.getMessage());
         }
     }
