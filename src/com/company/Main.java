@@ -39,7 +39,36 @@ public class Main {
         setWritePathDriver(jsonDriver);
         System.out.println();
 
+        Service.getCars(cars);
+        System.out.println("----------------------------------------------");
+        Service.gerDrivers(drivers);
+        System.out.println("------------------------------------");
+        while (true) {
+            try {
+                System.out.println("Choose one of the trucks: ");
+                int input = scanner.nextInt();
+                scanner.nextLine();
+                Service.getDescription(cars[input - 1]);
 
+                int number = scanner.nextInt();
+                if(number == 1) {
+                    Service.changeDriver(cars[input - 1],drivers[input - 1]);
+                } else if(number == 2) {
+                    Service.startDriving(cars[input - 1], drivers[input - 1]);
+                } else if(number == 3) {
+                    Service.startRepair(cars[input - 1], drivers[input - 1]);
+                }
+                else {
+                    throw new IndexOutOfBoundsException();
+                }
+            } catch(IndexOutOfBoundsException e) {
+                System.err.println("You wrote the wrong number! Please can you write again");
+            }
+            Service.getCars(cars);
+            System.out.println("----------------------------------------------");
+            Service.gerDrivers(drivers);
+            System.out.println("------------------------------------");
+        }
     }
     private static void setWritePath(String object){
         Path setWritePath = Paths.get(String.valueOf(WRITE_PATH_Car));
